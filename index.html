@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ΑΒΛΑΝΑΘΑΝΑΛΒΑ</title>
+    <style>
+		html,body {
+			height: 100%;
+			padding: 0;
+			margin: 0;
+		}
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            font-size: 350%;
+        }
+        #resultHolder {
+            text-align: center;
+            align-self: center;
+            flex-direction: column;
+        }
+        .incantation-character {
+            align-self: center;
+            animation: changeColor 3s infinite alternate;
+            -webkit-animation: changeColor 3s infinite alternate;
+        }
+        /* Safari 4.0 - 8.0 */
+        @-webkit-keyframes changeColor {
+            from {color: greenyellow;}
+            to {color: white;}
+        }
+
+        /* Standard syntax */
+        @keyframes changeColor {
+            from {color: greenyellow;}
+            to {color: white;}
+        }
+        .itemName {
+            display: flex;
+            flex-direction: column;
+        }
+        .itemName > span:nth-child(1) {
+            align-self: flex-start;
+        }
+        .itemName > span:nth-child(2) {
+            margin-top: auto;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+<div class="itemName">
+    <span class="incantation-character">
+        АВРАΣАΞ
+    </span>    
+     <span class="incantation-character">
+         АВРАΣАΞ
+    </span>    
+</div>
+<div id="resultHolder">
+</div>
+<div class="itemName">
+    <span class="incantation-character">
+        АВРАΣАΞ
+    </span>    
+    <span class="incantation-character">
+        АВРАΣАΞ
+    </span>    
+</div>
+<script>
+"use strict";	
+    (function main() {
+        var input = document.title.toString(),
+                resultHolder = document.getElementById('resultHolder'),
+                firstItem = document.createElement('div'),
+                timeout = 3000;
+        resultHolder.innerHTML = '';
+        firstItem.setAttribute('class', 'incantation-character');
+        firstItem.textContent = input;
+        resultHolder.appendChild(firstItem);
+        setTimeout(function _buildIncatation() {
+            input = input.slice(0, -1).slice(1);
+            var incantatationPart = document.createElement('div');
+            incantatationPart.setAttribute('class', 'incantation-character');
+            incantatationPart.textContent = input;
+            resultHolder.insertBefore(incantatationPart.cloneNode(true), resultHolder.firstChild);
+            resultHolder.appendChild(incantatationPart);
+            if (input.length !== 1) {
+                setTimeout(_buildIncatation, timeout);
+            }
+        }, timeout);
+    })();
+</script>
+</body>
+</html>
